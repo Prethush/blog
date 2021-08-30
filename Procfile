@@ -1,1 +1,1 @@
-web: node conduit/bin/www
+web: node ./bin/www
