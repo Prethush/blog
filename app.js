@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 require("dotenv").config();
 
-mongoose.connect(process.env.MONGODB_URL,  { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+mongoose.connect(process.env.MONGODB_URL || process.env.PORT,  { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
   console.log(err ? err : "connected to db");
 });
 
@@ -51,4 +51,10 @@ app.use(function(err, req, res, next) {
   res.json({errors: {body: [err]}})
 });
 
+let port = process.env.PORT;
+
+if(port==null || port==""){
+  port=3000
+  }
+  app.listen(port, function(){console.log("app started on 3000")})
 module.exports = app;
