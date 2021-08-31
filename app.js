@@ -7,7 +7,9 @@ var mongoose = require('mongoose');
 
 require("dotenv").config();
 
-mongoose.connect(process.env.MONGODB_URL || process.env.PORT,  { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+var app = express();
+
+mongoose.connect( "mongodb://localhost:27017/conduit",  { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
   console.log(err ? err : "connected to db");
 });
 
@@ -17,7 +19,7 @@ var profileRouter = require('./routes/profile');
 var articleRouter = require('./routes/articles');
 var tagRouter = require('./routes/tags');
 
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,10 +53,10 @@ app.use(function(err, req, res, next) {
   res.json({errors: {body: [err]}})
 });
 
-let port = process.env.PORT;
+// let port = process.env.PORT;
 
-if(port==null || port==""){
-  port=3000
-  }
-  app.listen(port, function(){console.log("app started on 3000")})
+// if(port==null || port==""){
+//   port=3001
+// }
+//   app.listen(port, function(){console.log("app started on 3001")})
 module.exports = app;

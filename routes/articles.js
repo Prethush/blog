@@ -6,6 +6,7 @@ let User = require('../models/users');
 let Comment = require('../models/comments');
 let random = require('../middleware/random');
 
+
 //create article
 router.post('/', auth.verifyToken, async (req, res, next) => {
     req.body.article.author = req.user.userId;
